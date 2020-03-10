@@ -33,6 +33,14 @@ public class Window extends JFrame {
 	private JTextPane testingOutputTextPane;
 	private JLabel assessmentPanelTitle;
 	private JTextPane assessmentTextPane;
+	private JPanel mainControlPanel;
+	private JButton executeBothButton;
+	private JButton executeTemplateButton;
+	private JButton executeTestingButton;
+	private JPanel databaseConfigurationPanel;
+	private JPanel scriptExecutionPanel;
+	private JTextField jdbcUrlInput;
+	private JCheckBox enableForeignKeysCheckbox;
 
 	public Window() {
 		super("SQL-Assesser-2");
