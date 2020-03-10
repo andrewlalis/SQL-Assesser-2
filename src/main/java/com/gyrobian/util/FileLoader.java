@@ -33,19 +33,16 @@ public class FileLoader {
      * Reads a file into a string.
      * @param selectedFile The file object, as it is often selected by a JFileChooser.
      * @return The string containing the file, or an empty string.
+     * @throws IOException If the file could not be read.
      */
-    public static String readFile(File selectedFile) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(selectedFile))) {
-            String line;
-            StringBuilder sb = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append('\n');
-            }
-            return sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
+    public static String readFile(File selectedFile) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
+        String line;
+        StringBuilder sb = new StringBuilder();
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+            sb.append('\n');
         }
+        return sb.toString();
     }
 }
