@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="824" height="507"/>
+      <xy x="20" y="20" width="936" height="507"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -221,9 +221,8 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="1932b" class="javax.swing.JTextPane" binding="templateOutputTextPane">
+                  <component id="bbbf4" class="com.gyrobian.view.ExecutionLogDisplay" binding="templateOutputTextPane" custom-create="true">
                     <constraints/>
-                    <properties/>
                   </component>
                 </children>
               </scrollpane>
@@ -246,9 +245,8 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="99b7f" class="javax.swing.JTextPane" binding="testingOutputTextPane">
+                  <component id="223ac" class="com.gyrobian.view.ExecutionLogDisplay" binding="testingOutputTextPane" custom-create="true">
                     <constraints/>
-                    <properties/>
                   </component>
                 </children>
               </scrollpane>
@@ -256,7 +254,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="ab0b0" binding="mainControlPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="ab0b0" binding="mainControlPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -402,6 +400,51 @@
                     <constraints/>
                     <properties>
                       <text value="Execute Testing Script"/>
+                    </properties>
+                  </component>
+                  <component id="1474d" class="javax.swing.JButton" binding="clearExecutionOutputsButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Clear Outputs"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="1be05" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties/>
+            <border type="bevel-lowered"/>
+            <children>
+              <component id="f1e79" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <horizontalAlignment value="11"/>
+                  <text value="Assessment"/>
+                </properties>
+              </component>
+              <vspacer id="23b31">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </vspacer>
+              <grid id="89db7" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="3cdeb" class="javax.swing.JButton" binding="compareExecutionsButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Compare Template and Testing Scripts"/>
                     </properties>
                   </component>
                 </children>

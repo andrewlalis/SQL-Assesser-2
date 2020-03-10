@@ -2,9 +2,11 @@ package com.gyrobian.view;
 
 import com.gyrobian.listener.ClearTextComponentListener;
 import com.gyrobian.listener.LoadTextComponentFromFileListener;
+import com.gyrobian.listener.ScriptExecutionListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * The window that's used for displaying the application.
@@ -29,8 +31,8 @@ public class Window extends JFrame {
 	private JLabel outputPanelTitle;
 	private JPanel templateOutputPanel;
 	private JPanel testingOutputPanel;
-	private JTextPane templateOutputTextPane;
-	private JTextPane testingOutputTextPane;
+	private ExecutionLogDisplay templateOutputTextPane;
+	private ExecutionLogDisplay testingOutputTextPane;
 	private JLabel assessmentPanelTitle;
 	private JTextPane assessmentTextPane;
 	private JPanel mainControlPanel;
@@ -41,6 +43,8 @@ public class Window extends JFrame {
 	private JPanel scriptExecutionPanel;
 	private JTextField jdbcUrlInput;
 	private JCheckBox enableForeignKeysCheckbox;
+	private JButton clearExecutionOutputsButton;
+	private JButton compareExecutionsButton;
 
 	public Window() {
 		super("SQL-Assesser-2");
@@ -67,8 +71,22 @@ public class Window extends JFrame {
 	private void initializeEventListeners() {
 		this.clearTemplateButton.addActionListener(new ClearTextComponentListener(this.templateTextArea));
 		this.clearTestingButton.addActionListener(new ClearTextComponentListener(this.testingTextArea));
+		this.clearExecutionOutputsButton.addActionListener(new ClearTextComponentListener(this.templateOutputTextPane));
+		this.clearExecutionOutputsButton.addActionListener(new ClearTextComponentListener(this.testingOutputTextPane));
 
 		this.loadTemplateFromFileButton.addActionListener(new LoadTextComponentFromFileListener(this.templateTextArea));
 		this.loadTestingFromFileButton.addActionListener(new LoadTextComponentFromFileListener(this.testingTextArea));
+
+		ActionListener executeTemplateListener = new ScriptExecutionListener(this.jdbcUrlInput, this.templateTextArea, this.templateOutputTextPane);
+		ActionListener executeTestingListener = new ScriptExecutionListener(this.jdbcUrlInput, this.testingTextArea, this.testingOutputTextPane);
+		this.executeTemplateButton.addActionListener(executeTemplateListener);
+		this.executeTestingButton.addActionListener(executeTestingListener);
+		this.executeBothButton.addActionListener(executeTemplateListener);
+		this.executeBothButton.addActionListener(executeTestingListener);
+	}
+
+	protected void createUIComponents() {
+		this.templateOutputTextPane = new ExecutionLogDisplay();
+		this.testingOutputTextPane = new ExecutionLogDisplay();
 	}
 }
