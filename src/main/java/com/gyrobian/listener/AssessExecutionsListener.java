@@ -1,5 +1,6 @@
 package com.gyrobian.listener;
 
+import com.gyrobian.assessment.ExecutionLogComparisonAssessment;
 import com.gyrobian.database.ExecutionLog;
 import com.gyrobian.view.AssessmentDisplay;
 import com.gyrobian.view.ExecutionLogDisplay;
@@ -40,22 +41,20 @@ public class AssessExecutionsListener implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		triggerButton(this.executeTemplateButton, this);
+		triggerButton(this.executeTestingButton, this);
 		ExecutionLog lastTemplateExecution = this.templateExecutionLogDisplay.getLastExecutionLogDisplayed();
 		ExecutionLog lastTestingExecution = this.testingExecutionLogDisplay.getLastExecutionLogDisplayed();
-		if (lastTemplateExecution == null || lastTestingExecution == null) {
-			this.assessmentDisplay.appendToDocument("Could not find a recent execution for one of the scripts, re-running...\n", null);
-			triggerButton(this.executeTemplateButton, this);
-			triggerButton(this.executeTestingButton, this);
-			lastTemplateExecution = this.templateExecutionLogDisplay.getLastExecutionLogDisplayed();
-			lastTestingExecution = this.testingExecutionLogDisplay.getLastExecutionLogDisplayed();
 
-			if (lastTemplateExecution == null || lastTestingExecution == null) {
-				JOptionPane.showMessageDialog(this.assessmentDisplay, "Could not execute both scripts.", "Assessment Error", JOptionPane.WARNING_MESSAGE);
-				return;
-			}
+		if (lastTemplateExecution == null || lastTestingExecution == null) {
+			JOptionPane.showMessageDialog(this.assessmentDisplay, "Could not execute both scripts.", "Assessment Error", JOptionPane.WARNING_MESSAGE);
+			return;
 		}
 
+		this.assessmentDisplay.setText(null);
 
+		ExecutionLogComparisonAssessment assessment = ExecutionLogComparisonAssessment.fromExecutionLogs(lastTemplateExecution, lastTestingExecution);
+		this.assessmentDisplay.displayAssessment(assessment);
 	}
 
 	/**

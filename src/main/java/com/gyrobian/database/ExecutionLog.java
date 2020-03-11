@@ -1,5 +1,6 @@
 package com.gyrobian.database;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,14 +28,41 @@ public class ExecutionLog {
     }
 
     /**
-     * @return True if there's an exception somewhere in this execution log, or false otherwise.
+     * @return The list of all exceptions encountered.
      */
-    public boolean containsExceptions() {
-        for (ExecutionAction action : this.getActions()) {
+    public List<SQLException> getExceptions() {
+        List<SQLException> exceptions = new ArrayList<>();
+        this.actions.forEach(action -> {
             if (action.getException() != null) {
-                return true;
+                exceptions.add(action.getException());
             }
-        }
-        return false;
+        });
+        return exceptions;
+    }
+
+    /**
+     * @return The list of all schema update actions encountered.
+     */
+    public List<UpdateAction> getSchemaUpdateActions() {
+        List<UpdateAction> updateActions = new ArrayList<>();
+        this.actions.forEach(action -> {
+            if (action instanceof UpdateAction) {
+                updateActions.add((UpdateAction) action);
+            }
+        });
+        return updateActions;
+    }
+
+    /**
+     * @return The list of all query actions encountered.
+     */
+    public List<QueryAction> getQueryActions() {
+        List<QueryAction> queryActions = new ArrayList<>();
+        this.actions.forEach(action -> {
+            if (action instanceof QueryAction) {
+                queryActions.add((QueryAction) action);
+            }
+        });
+        return queryActions;
     }
 }
