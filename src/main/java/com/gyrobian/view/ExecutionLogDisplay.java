@@ -2,17 +2,14 @@ package com.gyrobian.view;
 
 import com.gyrobian.database.*;
 
-import javax.swing.*;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 
 /**
  * A type of text pane that's built for displaying SQL script execution logs.
  */
-public class ExecutionLogDisplay extends JTextPane {
+public class ExecutionLogDisplay extends AppendableJTextPane {
 
 	private Style timestampStyle;
 	private Style actionSubsectionLabelStyle;
@@ -91,20 +88,6 @@ public class ExecutionLogDisplay extends JTextPane {
 		this.exceptionStyle = this.addStyle("exception", null);
 		StyleConstants.setForeground(this.exceptionStyle, Color.red);
 		StyleConstants.setBold(this.exceptionStyle, true);
-	}
-
-	/**
-	 * Appends a styled string to the document.
-	 * @param str The string to append.
-	 * @param style The style to use for the string.
-	 */
-	private void appendToDocument(String str, Style style) {
-		StyledDocument document = this.getStyledDocument();
-		try {
-			document.insertString(document.getLength(), str, style);
-		} catch (BadLocationException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**

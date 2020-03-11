@@ -3,7 +3,10 @@ package com.gyrobian.database;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a result set from a SELECT query.
@@ -30,6 +33,12 @@ public class CachedResultSet {
 		return this.rows;
 	}
 
+	/**
+	 * Constructs a new cached result set from an actual result set.
+	 * @param resultSet The result set to gather data from.
+	 * @return A cached result set that can be used later.
+	 * @throws SQLException If an error occurs while reading the result set.
+	 */
 	public static CachedResultSet fromResultSet(ResultSet resultSet) throws SQLException {
 		ResultSetMetaData metaData = resultSet.getMetaData();
 
@@ -51,6 +60,9 @@ public class CachedResultSet {
 		return new CachedResultSet(columnNames, rows);
 	}
 
+	/**
+	 * @return This result set, formatted as an ASCII table.
+	 */
 	public String toFormattedTableString() {
 		int[] optimumColumnWidths = new int[this.columnNames.length];
 		int totalTableWidth = 0;
@@ -83,13 +95,5 @@ public class CachedResultSet {
 			sb.append("|\n").append("-".repeat(totalTableWidth)).append('\n');
 		}
 		return sb.toString();
-	}
-
-	@Override
-	public String toString() {
-		return "CachedResultSet{" +
-				"columnNames=" + Arrays.toString(columnNames) +
-				", rows=" + rows +
-				'}';
 	}
 }

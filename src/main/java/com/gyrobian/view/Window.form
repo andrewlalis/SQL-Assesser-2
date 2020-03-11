@@ -161,7 +161,7 @@
         <properties/>
         <border type="bevel-lowered"/>
         <children>
-          <component id="8cfc7" class="javax.swing.JLabel" binding="assessmentPanelTitle">
+          <component id="8cfc7" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -178,9 +178,8 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="c7cae" class="javax.swing.JTextPane" binding="assessmentTextPane">
+              <component id="cc18d" class="com.gyrobian.view.AssessmentDisplay" binding="assessmentTextPane" custom-create="true">
                 <constraints/>
-                <properties/>
               </component>
             </children>
           </scrollpane>
@@ -441,10 +440,10 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="3cdeb" class="javax.swing.JButton" binding="compareExecutionsButton">
+                  <component id="3cdeb" class="javax.swing.JButton" binding="assessExecutionsButton">
                     <constraints/>
                     <properties>
-                      <text value="Compare Template and Testing Scripts"/>
+                      <text value="Assess Template and Testing Scripts"/>
                     </properties>
                   </component>
                 </children>

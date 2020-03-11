@@ -1,5 +1,6 @@
 package com.gyrobian.view;
 
+import com.gyrobian.listener.AssessExecutionsListener;
 import com.gyrobian.listener.ClearTextComponentListener;
 import com.gyrobian.listener.LoadTextComponentFromFileListener;
 import com.gyrobian.listener.ScriptExecutionListener;
@@ -33,8 +34,7 @@ public class Window extends JFrame {
 	private JPanel testingOutputPanel;
 	private ExecutionLogDisplay templateOutputTextPane;
 	private ExecutionLogDisplay testingOutputTextPane;
-	private JLabel assessmentPanelTitle;
-	private JTextPane assessmentTextPane;
+	private AssessmentDisplay assessmentTextPane;
 	private JPanel mainControlPanel;
 	private JButton executeBothButton;
 	private JButton executeTemplateButton;
@@ -44,7 +44,7 @@ public class Window extends JFrame {
 	private JTextField jdbcUrlInput;
 	private JCheckBox enableForeignKeysCheckbox;
 	private JButton clearExecutionOutputsButton;
-	private JButton compareExecutionsButton;
+	private JButton assessExecutionsButton;
 
 	public Window() {
 		super("SQL-Assesser-2");
@@ -83,10 +83,19 @@ public class Window extends JFrame {
 		this.executeTestingButton.addActionListener(executeTestingListener);
 		this.executeBothButton.addActionListener(executeTemplateListener);
 		this.executeBothButton.addActionListener(executeTestingListener);
+
+		this.assessExecutionsButton.addActionListener(new AssessExecutionsListener(
+				this.templateOutputTextPane,
+				this.testingOutputTextPane,
+				this.executeTemplateButton,
+				this.executeTestingButton,
+				this.assessmentTextPane
+		));
 	}
 
 	protected void createUIComponents() {
 		this.templateOutputTextPane = new ExecutionLogDisplay();
 		this.testingOutputTextPane = new ExecutionLogDisplay();
+		this.assessmentTextPane = new AssessmentDisplay();
 	}
 }
